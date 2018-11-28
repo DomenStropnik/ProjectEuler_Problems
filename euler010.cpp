@@ -23,7 +23,7 @@ int main()
 
 	cout << "Insert the max: " << endl;
 	cin >> primeMax;
-	
+
 	if (primeMax > 1)
 	{
 		for (long i = 2; primeMax > i; ++i)
