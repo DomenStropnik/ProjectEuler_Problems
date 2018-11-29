@@ -18,6 +18,7 @@ long check(long i)
 int main()
 {
 	system("clear");
+
 	long primeMax = 0;
 	long long sum = 0;
 
