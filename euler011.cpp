@@ -37,7 +37,7 @@
 
  #include <iostream>
 
- int productFunction(int adjNumber);
+ int productFunction(int number);
  int array[20][20] = //08 & 09, invalid digit in octal constant!
  {
   { 8,02,22,97,38,15,00,40,00,75,04,05,07,78,52,12,50,77,91, 8},
@@ -61,6 +61,7 @@
   {20,73,35,29,78,31,90,01,74,31,49,71,48,86,81,16,23,57,05,54},
   {01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,01,89,19,67,48}
 };
+ int size = 20;
 
  int main()
  {
@@ -78,65 +79,40 @@
  int productFunction(int number)
  {
    int largest = 0;
+   int lenght = number - 1;
 
-   for (int j = 0; j < 20; j++)
-     for (int i = 0; i < 20; i++) //horizontal (right)
-       if (i + (number - 1) < 20)
-       {
-         int stevec = 0;
-         int temp = 1;
-         while (number > stevec)
-         {
-           temp *= array[i+stevec][j];
-           ++stevec;
-         }
-         if (temp > largest)
-           largest = temp;
-       }
+   for (int y = 0; y < size; ++y) // y, x are indexes in the table
+       for (int x = 0; x < size; ++x) {
+         int horizontal = 1, vertical = 1;
+         int diagonalR = 1, diagonalL = 1;
 
-   for (int j = 0; j < 20; j++)
-     for (int i = 0; i < 20; i++) //vertical (down)
-       if (i + (number - 1) < 20)
-       {
-         int stevec = 0;
-         int temp = 1;
-         while (number > stevec)
-         {
-           temp *= array[i][j+stevec];
-           ++stevec;
-         }
-         if (temp > largest)
-           largest = temp;
-       }
-
-   for (int i = 0; i < 20; ++i)
-     for (int j = 0; j < 20; ++j) //diagonal (right-down)
-       if (i + (number - 1) < 20 && j + (number - 1) < 20)
-         {
-           int stevec = 0;
-           int temp = 1;
-           while (number > stevec)
+           for (int i = 0; i < number; ++i)
            {
-             temp *= array[i+stevec][j+stevec];
-             ++stevec;
-           }
-           if (temp > largest)
-             largest = temp;
-         }
+             if (y + lenght < size)
+             {
+               horizontal *= array[y][x+i];
+               vertical *= array[y+i][x];
 
-   for (int i = 0; i < 20; ++i)
-     for (int j = 0; j < 20; ++j) //diagonal (left-down)
-     if (i + (number - 1) < 20 && j >= (number -1))
-       {
-         int stevec = 0;
-         int temp = 1;
-         while (number > stevec)
-         {
-           temp *= array[i+stevec][j-stevec];
-           ++stevec;
-         }
-         if (temp > largest)
-           largest = temp;
-       }
+               if (horizontal > largest)
+                  largest = horizontal;
+               if (vertical > largest)
+                  largest = vertical;
+             }
+
+             if (y + lenght < size && x + lenght < size)
+             {
+               diagonalR *= array[y+i][x+i];
+               if (diagonalR > largest)
+               largest = diagonalR;
+
+             }
+             if (y + lenght < size && x >= lenght)
+             {
+              diagonalL *= array[y+i][x-i];
+              if (diagonalL > largest)
+              largest = diagonalL;
+          }
+        }
+      }
     return largest;
  }
