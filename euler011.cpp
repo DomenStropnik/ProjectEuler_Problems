@@ -1,4 +1,7 @@
-/* In the 20×20 grid below, four numbers along a diagonal line have
+/*
+ * Euler Projects - Problem 11
+ *
+ * In the 20×20 grid below, four numbers along a diagonal line have
  * been marked in red (26, 63, 78, 14).
  *
  * 08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
@@ -26,14 +29,15 @@
  *
  * What is the greatest product of four adjacent numbers in the same direction
  * (up, down, left, right, or diagonallj) in the 20×20 grid?
+ *
+ * Answer: 70600674
+ * Source: https://projecteuler.net/problem=11
+ * Code by: Domen Stropnik
  */
 
  #include <iostream>
- using namespace std;
 
- int horizontalFunction(int number);
- int verticalFunction(int number);
- int diagonal(int number);
+ int productFunction(int adjNumber);
  int array[20][20] = //08 & 09, invalid digit in octal constant!
  {
   { 8,02,22,97,38,15,00,40,00,75,04,05,07,78,52,12,50,77,91, 8},
@@ -60,23 +64,23 @@
 
  int main()
  {
-   int number = 0;
-   cout << "Inser a value: ";
-   cin >> number;
+   int adjNumber = 0;
+   std::cout << "Inser a value: ";
+   std::cin >> adjNumber;
 
-   cout << "horizontal: " << horizontalFunction(number) << endl;
-   cout << "vertical: " << verticalFunction(number) << endl;
-   cout << "diagonalRight: " << diagonal(number) << endl;
+   std::cout << "The greatest product is: "
+   << productFunction(adjNumber) << std::endl;
 
    return 0;
  }
 
- int horizontalFunction(int number)
+
+ int productFunction(int number)
  {
    int largest = 0;
 
    for (int j = 0; j < 20; j++)
-     for (int i = 0; i < 20; i++) //horizontal value (right) 51267216
+     for (int i = 0; i < 20; i++) //horizontal (right)
        if (i + (number - 1) < 20)
        {
          int stevec = 0;
@@ -89,15 +93,9 @@
          if (temp > largest)
            largest = temp;
        }
-   return largest;
-}
-
- int verticalFunction(int number)
- {
-   int largest = 0;
 
    for (int j = 0; j < 20; j++)
-     for (int i = 0; i < 20; i++) //horizontal value (right)
+     for (int i = 0; i < 20; i++) //vertical (down)
        if (i + (number - 1) < 20)
        {
          int stevec = 0;
@@ -110,15 +108,9 @@
          if (temp > largest)
            largest = temp;
        }
-   return largest;
-}
-
- int diagonal(int number)
- {
-   int largest = 0;
 
    for (int i = 0; i < 20; ++i)
-     for (int j = 0; j < 20; ++j) //diagonal value (right-down)
+     for (int j = 0; j < 20; ++j) //diagonal (right-down)
        if (i + (number - 1) < 20 && j + (number - 1) < 20)
          {
            int stevec = 0;
@@ -133,7 +125,7 @@
          }
 
    for (int i = 0; i < 20; ++i)
-     for (int j = 0; j < 20; ++j) //diagonal value (left-down)
+     for (int j = 0; j < 20; ++j) //diagonal (left-down)
      if (i + (number - 1) < 20 && j >= (number -1))
        {
          int stevec = 0;
@@ -146,6 +138,5 @@
          if (temp > largest)
            largest = temp;
        }
-
-       return largest;
+    return largest;
  }
