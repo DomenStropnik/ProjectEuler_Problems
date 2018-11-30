@@ -25,7 +25,7 @@
  * The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
  *
  * What is the greatest product of four adjacent numbers in the same direction
- * (up, down, left, right, or diagonally) in the 20×20 grid?
+ * (up, down, left, right, or diagonallj) in the 20×20 grid?
  */
 
  #include <iostream>
@@ -33,8 +33,7 @@
 
  int horizontalFunction(int number);
  int verticalFunction(int number);
- int diagonalRightFunction(int number);
- int diagonalLeftFunction(int number);
+ int diagonal(int number);
  int array[20][20] = //08 & 09, invalid digit in octal constant!
  {
   { 8,02,22,97,38,15,00,40,00,75,04,05,07,78,52,12,50,77,91, 8},
@@ -67,106 +66,86 @@
 
    cout << "horizontal: " << horizontalFunction(number) << endl;
    cout << "vertical: " << verticalFunction(number) << endl;
-   cout << "diagonalRight: " << diagonalRightFunction(number) << endl;
+   cout << "diagonalRight: " << diagonal(number) << endl;
 
    return 0;
  }
 
  int horizontalFunction(int number)
  {
-   long value = 0;
-   int st = 0;
-   long temp = 1;
+   int largest = 0;
 
-   for (int i = 0; i < 20; ++i)
-   {
-     for (int j = 0; j < 20; ++j)
-     {
-       ++st;
-       //cout << "\n" << array[i][j] << endl;
-       temp *= array[i][j];
-       //cout << "temp: " << temp << endl;
-       if (st == number && temp > value){
-        value = temp;
-        temp = 1;
-        st = 0;
-        //cout << "VALUE: " << value;
+   for (int j = 0; j < 20; j++)
+     for (int i = 0; i < 20; i++) //horizontal value (right) 51267216
+       if (i + (number - 1) < 20)
+       {
+         int stevec = 0;
+         int temp = 1;
+         while (number > stevec)
+         {
+           temp *= array[i+stevec][j];
+           ++stevec;
+         }
+         if (temp > largest)
+           largest = temp;
        }
-       else if (st == number){
-         st = 0;
-         temp = 1;
-       }
-     }
-   }
-   return value;
- }
+   return largest;
+}
 
  int verticalFunction(int number)
  {
-   long value = 0;
-   int st = 0;
-   long temp = 1;
+   int largest = 0;
+
+   for (int j = 0; j < 20; j++)
+     for (int i = 0; i < 20; i++) //horizontal value (right)
+       if (i + (number - 1) < 20)
+       {
+         int stevec = 0;
+         int temp = 1;
+         while (number > stevec)
+         {
+           temp *= array[i][j+stevec];
+           ++stevec;
+         }
+         if (temp > largest)
+           largest = temp;
+       }
+   return largest;
+}
+
+ int diagonal(int number)
+ {
+   int largest = 0;
 
    for (int i = 0; i < 20; ++i)
-   {
-     for (int j = 0; j < 20; ++j)
-     {
-       ++st;
-       //cout << "\n" << array[i][j] << endl;
-       temp *= array[j][i];
-       //cout << "temp: " << temp << endl;
-       if (st == number && temp > value){
-        value = temp;
-        temp = 1;
-        st = 0;
-        //cout << "VALUE: " << value;
-       }
-       else if (st == number){
-         st = 0;
-         temp = 1;
-       }
-     }
-   }
-   return value;
- }
-
- int diagonalRightFunction(int number)
- {
-   long value = 0;
-   int st = 0;
-   int st2 = 0;
-   long temp = 1;
+     for (int j = 0; j < 20; ++j) //diagonal value (right-down)
+       if (i + (number - 1) < 20 && j + (number - 1) < 20)
+         {
+           int stevec = 0;
+           int temp = 1;
+           while (number > stevec)
+           {
+             temp *= array[i+stevec][j+stevec];
+             ++stevec;
+           }
+           if (temp > largest)
+             largest = temp;
+         }
 
    for (int i = 0; i < 20; ++i)
-   {
-     for (int j = 0; j < 20; ++j)
-     {
-       ++st;
-       if (st2 == 0)
-        temp = array[i][j];
-       cout << "\n" << array[i][j] << endl;
-       ++st2;
-       if (st != 4)
-        temp *= array[i+1][j+1];
-       cout << "temp: " << temp << endl;
-       if (st == number && temp > value){
-        value = temp;
-        temp = 1;
-        st = 0;
-        st = 0;
-        cout << "VALUE: " << value;
+     for (int j = 0; j < 20; ++j) //diagonal value (left-down)
+     if (i + (number - 1) < 20 && j >= (number -1))
+       {
+         int stevec = 0;
+         int temp = 1;
+         while (number > stevec)
+         {
+           temp *= array[i+stevec][j-stevec];
+           ++stevec;
+         }
+         if (temp > largest)
+           largest = temp;
        }
-       else if (st == number){
-         st = 0;
-         st2 = 0;
-         temp = 1;
-       }
-     }
-   }
-   return value;
- }
 
- int diagonalLeftFunction(int number)
- {
-
+       return largest;
  }
