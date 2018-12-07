@@ -8,6 +8,7 @@
  *
  */
 
+/*
 #include <iostream>
 
 unsigned long long nFactorial1(int x);
@@ -55,4 +56,21 @@ unsigned long long nFactorial2(int x)
     times *= i;
   
   return times;
+}
+*/
+
+#include <iostream>
+
+int main()
+{
+  const int gridSize = 20;
+  long long paths = 1;
+
+  for (int i = 0; i < gridSize; i++) {
+    paths *= (2 * gridSize) - i;
+    paths /= i + 1;
+  }
+
+  std::cout << paths << std::endl;
+  return 0;
 }
