@@ -1,4 +1,5 @@
 /*
+ *
  * Euler Project Problems - 15
  *
  * Starting in the top left corner of a 2×2 grid, and only being able to move
@@ -8,56 +9,50 @@
  */
 
 #include <iostream>
-#include <vector>
-#include <cmath>
 
-int nFactorial(int x);
-int nFactorial2(int y);
+unsigned long long nFactorial1(int x);
+unsigned long long nFactorial2(int x);
 
 int main()
 {
   int nValue = 0;
   std::cout << "Insert grid value (max 20): ";
   std::cin >> nValue;
-  unsigned long long returned = 0;
-  unsigned long long st = 0;
+
+  unsigned long long nNum1 = 0;
+  unsigned long long nNum2 = 0;
 
   if (nValue <= 20 && nValue > 1)
   {
-    returned = nFactorial(nValue);
-    st = nFactorial2(nValue);
-}
-  unsigned long long finalValue = (pow(st, 2)) / (st * st);
+    nNum1 = nFactorial1(nValue);
+    nNum2 = nFactorial2(nValue);
+  }
+  else
+	std::cout << "Please insert a value above 1 or bellow 21" << std::endl;
 
-  std::cout << finalValue << std::endl;
+  unsigned long long nNum3 = nNum1 / (nNum2 * nNum2);
+  std::cout << nNum3 << std::endl;
+
   return 0;
 }
 
-int nFactorial(int x)
+unsigned long long nFactorial1(int x)
 {
-  std::vector<int> nVector;
   x *= 2;
   unsigned long long times = 1;
-
+  
   for (int i = 1; i <= x; ++i)
-    nVector.push_back(i);
-
-  for (unsigned int i = 0; i <= nVector.size() - 1; ++i)
-    times *= nVector[i];
-
+    times *= i;
+  
   return times;
 }
 
-int nFactorial2(int x)
+unsigned long long nFactorial2(int x)
 {
-  std::vector<int> nVector;
   unsigned long long times = 1;
-
+  
   for (int i = 1; i <= x; ++i)
-    nVector.push_back(i);
-
-  for (unsigned int i = 0; i <= nVector.size() - 1; ++i)
-    times *= nVector[i];
-
+    times *= i;
+  
   return times;
 }
