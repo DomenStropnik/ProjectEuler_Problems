@@ -20,60 +20,67 @@ What is the value of the first triangle number to have over five hundred divisor
 */
 
 #include <iostream>
+#include <vector>
+#include <cmath>
+
+int printDevisors(int n);
+
+int st = 0;
 
 int main()
 {
-  /*int triNumber;
-  std::cout << "Insert the triangle number: ";
-  std::cin >> triNumber;
-
-  int triValue = 0;
-  int sumDivisor = 0;
-
-  do //to calculate the term
-  {
-    triValue += triNumber;
-    std::cout << "Value: " << triValue << std::endl;
-  } while(--triNumber);
-
-  for (int i = 1; i <= triValue; ++i)
-  {
-    if (triValue % i == 0)
-    {
-      std::cout << "divisor: " << i << std::endl;
-      sumDivisor += i;
-    }
-  }
-
-  std::cout << "The value is: " << sumDivisor << std::endl;*/
-
-  int divisorNumber = 0;
+  int divisorN = 0;
   int temp = 0;
-  int st = 0;
-  int sum = 0;
-  int largest = 0;
-
-  std::cout << "Insert a value: ";
-  std::cin >> divisorNumber;
+ 
+  std::cout << "Insert the number of divisors: ";
+  std::cin >> divisorN;
+  
 
   for (int i = 1; i > 0; ++i)
-    {
+  {
       temp += i;
-      for (int j = 1; j <= temp; ++j)
-      {
-        if (temp % j == 0 && st != divisorNumber && j > largest)
-        {
-          largest = j;
-          ++st;
-          sum += j;
-          std::cout << "divisor is: " << j << std::endl;
-        }
-      }
-     if (st == divisorNumber)
-        break;
+      std::cout << "The term is is: " << temp << " devisors: ";
+	  st = printDevisors(temp);
+      
+      if (st >= divisorN)
+		break;
+	  
+	  st = 0;
+	  	
     }
+ 
 
-    std::cout << "sum: " << sum << std::endl;
     std::cout << "value: " << temp << std::endl;
   return 0;
+}
+
+int printDevisors(int n)
+{
+	std::vector<int> nVector;
+	
+	for (int i = 1; i <= sqrt(n); ++i)
+	{
+		if (n % i == 0)
+		{
+			if (n / i == i)
+			{
+				++st;
+				printf("%d, ", i);
+			}
+			else
+			{
+				++st;
+				printf("%d, ", i);
+				nVector.push_back(n/i);
+			}
+		}
+	}
+
+	for (int i = nVector.size() - 1; i >= 0; --i)
+	{
+		++st;
+		printf("%d, ", nVector[i]);
+	}
+	std:: cout << "\n";
+	return st;
 }

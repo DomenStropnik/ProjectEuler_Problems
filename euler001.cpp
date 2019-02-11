@@ -6,37 +6,35 @@
  * Find the sum of all the multiples of 3 or 5 below 1000.
  *
  * Answer: 233168
- * Source: https://projecteuler.net/problem=1
- * Code by: Domen Stropnik 
+ * Source: https://projecteuler.net/problem=1 
  */
 
 #include <iostream>
 
 int main()
 {
-	int sum = 0; //Variable holding the sum of all the mltiples
+	int nSum = 0; //an int ariable holding the sum of all the mltiples.
 
-	int a; //1st variable holding the value of the 1st multiple
+	int a; //1st variable holding the value of the 1st multiple.
 	std::cout << "Enter the 1st value: ";
 	std::cin >> a;
 
-	int b; //2nd variable holding the value of the 2nd multiple
+	int b; //2nd variable holding the value of the 2nd multiple.
 	std::cout << "Enter the 2nd value: ";
 	std::cin >> b;
 
-	int value = 0;
-	std::cout << "Enter the value of where you'd like to see the sum of" << 
-		"all the multiples, bellow this current value: ";
-	std::cin >> value;
+	int nValue; //main variable for finding the wished sum.
+	std::cout << "Enter the value to receive sum of multiples: ";
+	std::cin >> nValue;
 	
-	if (a > 1 && b > 1 && a != b && value > a && value > b){
-		for (int i = 0; i < value; ++i)
+	if (a > 1 && b > 1 && a != b && nValue > a && nValue > b){ //error checking.
+		for (int i = 0; i < nValue; ++i) //loop.
 			if (i % a == 0 || i % b == 0)
-				sum += i;
-		std::cout << "The sum is: " << sum << std::endl;
+				nSum += i;
+		std::cout << "The sum is: " << nSum << std::endl; //result output.
 	}
 	else {
-		std::cout << "You made a logic error!" << std::endl;
+		std::cout << "You made a logic error!" << std::endl; //error output.
 	}
 
 	return 0;
