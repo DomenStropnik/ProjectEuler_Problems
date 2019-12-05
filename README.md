@@ -3,6 +3,6 @@ Some training to help me with my coding style. By doing the tricky math challeng
 https://projecteuler.net/archives
 
 <ul>
-  <li><b>Language: </b> c++</li>
+  <li><b>Language: </b> C++</li>
   <li><b>IDE:</b> gVIM or Visual Studio Code</li>
 </ul>
